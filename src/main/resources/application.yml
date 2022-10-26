@@ -1,0 +1,9 @@
+spring:
+  main:
+    banner-mode: OFF
+
+dgs:
+  graphql:
+    schema-locations:
+      - classpath*:schema/**/*.graphql
+      - classpath*:schema/**/*.gql

@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.plucas.graphql.generated.types.Address;
 import com.plucas.graphql.generated.types.Author;
 import com.plucas.graphql.generated.types.MobileApp;
+import com.plucas.graphql.generated.types.MobileAppCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -41,6 +42,7 @@ public class FakeMobileAppDataSource {
                     .releaseDate(LocalDate.now().minusDays(faker.random().nextInt(365)))
                     .downloaded(faker.number().numberBetween(1, 1_500))
                     .homepage(new URL("https://" + faker.internet().url()))
+                    .category(MobileAppCategory.values()[faker.random().nextInt(MobileAppCategory.values().length)])
                     .build();
 
             for (int j = 0; j < ThreadLocalRandom.current().nextInt(1, 3); j++) {

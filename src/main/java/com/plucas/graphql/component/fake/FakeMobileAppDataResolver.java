@@ -11,6 +11,7 @@ import com.plucas.graphql.generated.types.MobileAppFilter;
 import graphql.schema.DataFetchingEnvironment;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,7 +37,10 @@ public class FakeMobileAppDataResolver {
         var isAppMatch = StringUtils.containsIgnoreCase(mobileApp.getName() ,
                 StringUtils.defaultIfBlank(mobileAppFilter.getName(), StringUtils.EMPTY))
                 && StringUtils.containsIgnoreCase(mobileApp.getVersion(),
-                StringUtils.defaultIfBlank(mobileAppFilter.getVersion(), StringUtils.EMPTY));
+                StringUtils.defaultIfBlank(mobileAppFilter.getVersion(), StringUtils.EMPTY))
+                && mobileApp.getReleaseDate().isAfter(
+                        Optional.ofNullable(mobileAppFilter.getReleasedAfter()).orElse(LocalDate.MIN)
+        ) && mobileApp.getDownloaded() >= Optional.ofNullable(mobileAppFilter.getMinimumDownload()).orElse(0);
 
         if (!isAppMatch) {
             return false;

@@ -30,4 +30,7 @@ tasks.named('test') {
 
 generateJava{
 	packageName = 'com.plucas.graphql.generated'
+	typeMapping = ["Date": "java.time.LocalDate",
+				   "NonNegativeInt": "java.lang.Integer",
+				   "Url": "java.net.URL"]
 }

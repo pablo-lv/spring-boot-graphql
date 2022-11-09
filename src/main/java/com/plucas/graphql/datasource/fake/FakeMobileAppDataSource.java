@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +37,10 @@ public class FakeMobileAppDataSource {
                     .name(faker.app().name())
                     .author(author).version(faker.app().version())
                     .platform(randomMobileAppPlatform())
-//                    .appId(UUID.randomUUID().toString())
+                    .appId(UUID.randomUUID().toString())
+                    .releaseDate(LocalDate.now().minusDays(faker.random().nextInt(365)))
+                    .downloaded(faker.number().numberBetween(1, 1_500))
+                    .homepage(new URL("https://" + faker.internet().url()))
                     .build();
 
             for (int j = 0; j < ThreadLocalRandom.current().nextInt(1, 3); j++) {

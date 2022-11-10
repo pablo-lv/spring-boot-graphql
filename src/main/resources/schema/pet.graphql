@@ -1,13 +1,16 @@
+""" This is a sample documentation on PetFootType"""
 enum PetFoodType {
     HERBIVORE, CARNIVORE, OMNIVORE
 }
 
 interface Pet {
+    """Pet's name, make it <strong>cute</strong>"""
     name: String!
     food: PetFoodType
     breed: String
 }
 
+"""Dog implements Pet"""
 type Dog implements Pet {
     name: String!
     food: PetFoodType

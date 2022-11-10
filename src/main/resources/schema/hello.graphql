@@ -6,3 +6,8 @@ type Hello {
 schema {
     query: Query
 }
+
+input HelloInput {
+    text: String!
+    number: Int!
+}

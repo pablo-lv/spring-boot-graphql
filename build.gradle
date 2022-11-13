@@ -20,6 +20,7 @@ dependencies {
 	implementation(platform('com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.3.0'))
 	implementation('com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter')
 	implementation('com.netflix.graphql.dgs:graphql-dgs-extended-scalars')
+	implementation('com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure')
 	implementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'org.yaml' }
 	implementation group: 'org.yaml', name: 'snakeyaml', version: '1.33'
 }
@@ -32,5 +33,6 @@ generateJava{
 	packageName = 'com.plucas.graphql.generated'
 	typeMapping = ["Date": "java.time.LocalDate",
 				   "NonNegativeInt": "java.lang.Integer",
-				   "Url": "java.net.URL"]
+				   "Url": "java.net.URL",
+					"DateTime": "java.time.OffsetDateTime"]
 }

@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation(platform('com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.3.0'))
@@ -23,6 +24,8 @@ dependencies {
 	implementation('com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure')
 	implementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'org.yaml' }
 	implementation group: 'org.yaml', name: 'snakeyaml', version: '1.33'
+
+	runtimeOnly 'org.postgresql:postgresql'
 }
 
 tasks.named('test') {

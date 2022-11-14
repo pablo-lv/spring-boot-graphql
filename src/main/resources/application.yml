@@ -1,6 +1,14 @@
 spring:
   main:
     banner-mode: OFF
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=problems
+    username:
+    password:
+  jpa:
+    hibernate:
+      dd-auto: none
+    show-sql: false
 
 dgs:
   graphql:

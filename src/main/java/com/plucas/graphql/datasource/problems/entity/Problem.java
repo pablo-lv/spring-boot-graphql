@@ -21,7 +21,7 @@ public class Problem {
     @CreationTimestamp
     private LocalDateTime creationTimestamp;
 
-    @OneToMany(mappedBy = "problems")
+    @OneToMany(mappedBy = "problem")
     private List<Solution> solutions;
 
     @ManyToOne

@@ -21,7 +21,7 @@ public class GraphqlBeanMapper {
 
     public static com.plucas.graphql.generated.types.User mapToGraphql(User original) {
         var result = new com.plucas.graphql.generated.types.User();
-        var createDateTime = original.getCreateTimestamp().atOffset(ZONE_OFFSET);
+        var createDateTime = original.getCreationTimestamp().atOffset(ZONE_OFFSET);
         result.setId(original.getId().toString());
         result.setAvatar(original.getAvatar());
         result.setCreateDateTime(createDateTime);
@@ -66,6 +66,7 @@ public class GraphqlBeanMapper {
         result.setId(original.getId().toString());
         result.setVoteAsBadCount(original.getVoteBadCount());
         result.setVoteAsGoodCount(original.getVoteGoodCount());
+        result.setCreateDateTime(createDateTime);
         result.setPrettyCreatedDateTime(PRETTY_TIME.format(createDateTime));
         return result;
     }

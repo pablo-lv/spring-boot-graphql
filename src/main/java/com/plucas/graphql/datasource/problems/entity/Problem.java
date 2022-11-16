@@ -22,6 +22,7 @@ public class Problem {
     private LocalDateTime creationTimestamp;
 
     @OneToMany(mappedBy = "problem")
+    @OrderBy("creationTimestamp desc")
     private List<Solution> solutions;
 
     @ManyToOne

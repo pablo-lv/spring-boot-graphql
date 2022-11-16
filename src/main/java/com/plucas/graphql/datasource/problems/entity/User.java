@@ -22,7 +22,7 @@ public class User {
     private boolean active;
     private String displayName;
     @CreationTimestamp
-    private LocalDateTime createTimestamp;
+    private LocalDateTime creationTimestamp;
 
     public UUID getId() {
         return id;
@@ -80,11 +80,11 @@ public class User {
         this.displayName = displayName;
     }
 
-    public LocalDateTime getCreateTimestamp() {
-        return createTimestamp;
+    public LocalDateTime getCreationTimestamp() {
+        return creationTimestamp;
     }
 
-    public void setCreateTimestamp(LocalDateTime createTimestamp) {
-        this.createTimestamp = createTimestamp;
+    public void setCreationTimestamp(LocalDateTime createTimestamp) {
+        this.creationTimestamp = createTimestamp;
     }
 }

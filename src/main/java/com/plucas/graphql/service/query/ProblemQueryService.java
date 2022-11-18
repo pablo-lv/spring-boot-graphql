@@ -22,4 +22,8 @@ public class ProblemQueryService {
     public Optional<Problem> findProblemById(final UUID id) {
         return problemRepository.findById(id);
     }
+
+    public List<Problem> problemsByKeyword(String keyword) {
+        return problemRepository.findByKeyword("%"+ keyword +"%");
+    }
 }

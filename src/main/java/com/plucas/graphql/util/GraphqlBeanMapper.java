@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +51,7 @@ public class GraphqlBeanMapper {
         result.setTitle(original.getTitle());
         result.setPrettyCreatedDateTime(PRETTY_TIME.format(createDateTime));
         result.setSolutionCount(convertedSolutions.size());
+        result.setTags(new ArrayList<String>(Arrays.asList(original.getTags().split(","))));
         return result;
     }
 

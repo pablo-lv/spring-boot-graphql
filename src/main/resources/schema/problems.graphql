@@ -1,5 +1,5 @@
 type User {
-    id : ID!
+    id: ID!
     username: String!
     email: String!
     avatar: Url
@@ -8,22 +8,22 @@ type User {
     problems: [Problem!]
 }
 
-type Problem implements SearchableItem{
+type Problem implements SearchableItem {
     id: ID!
     createDateTime: DateTime!
-    prettyCreatedDateTime: String
+    prettyCreateDateTime: String
     title: String!
     content: String!
     tags: [String!]!
-    solutionCount: NonNegativeInt
+    solutionCount: NonNegativeInt!
     author: User!
     solutions: [Solution!]
 }
 
-type Solution implements SearchableItem{
+type Solution implements SearchableItem {
     id: ID!
     createDateTime: DateTime!
-    prettyCreatedDateTime: String
+    prettyCreateDateTime: String
     content: String!
     category: SolutionCategory!
     voteAsGoodCount: NonNegativeInt
@@ -39,7 +39,7 @@ enum SolutionCategory {
 interface SearchableItem {
     id: ID!
     createDateTime: DateTime!
-    prettyCreatedDateTime: String
+    prettyCreateDateTime: String
     content: String!
     author: User!
 }
@@ -76,7 +76,6 @@ input SolutionCreateInput {
     content: String!
     category: SolutionCategory!
     problemId: ID!
-
 }
 
 input SolutionVoteInput {
@@ -86,11 +85,11 @@ input SolutionVoteInput {
 
 type UserAuthToken {
     authToken: String
-    expireTime: DateTime
+    expiryTime: DateTime
 }
 
 type UserResponse {
-    User: User
+    user: User
     authToken: UserAuthToken
 }
 

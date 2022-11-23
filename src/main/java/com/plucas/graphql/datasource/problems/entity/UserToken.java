@@ -16,7 +16,7 @@ public class UserToken {
     private UUID userId;
     private String authToken;
     @CreationTimestamp
-    private LocalDateTime creationTimestamp;
+    private LocalDateTime createTimestamp;
     private LocalDateTime expiryTimestamp;
 
     public UUID getUserId() {
@@ -35,12 +35,12 @@ public class UserToken {
         this.authToken = authToken;
     }
 
-    public LocalDateTime getCreationTimestamp() {
-        return creationTimestamp;
+    public LocalDateTime getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public void setCreationTimestamp(LocalDateTime creationTimestamp) {
-        this.creationTimestamp = creationTimestamp;
+    public void setCreateTimestamp(LocalDateTime creationTimestamp) {
+        this.createTimestamp = creationTimestamp;
     }
 
     public LocalDateTime getExpiryTimestamp() {

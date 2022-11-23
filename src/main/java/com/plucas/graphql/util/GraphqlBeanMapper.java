@@ -49,7 +49,7 @@ public class GraphqlBeanMapper {
         result.setId(original.getId().toString());
         result.setSolutions(convertedSolutions);
         result.setTitle(original.getTitle());
-        result.setPrettyCreatedDateTime(PRETTY_TIME.format(createDateTime));
+        result.setPrettyCreateDateTime(PRETTY_TIME.format(createDateTime));
         result.setSolutionCount(convertedSolutions.size());
         result.setTags(new ArrayList<String>(Arrays.asList(original.getTags().split(","))));
         return result;
@@ -70,7 +70,7 @@ public class GraphqlBeanMapper {
         result.setVoteAsBadCount(original.getVoteBadCount());
         result.setVoteAsGoodCount(original.getVoteGoodCount());
         result.setCreateDateTime(createDateTime);
-        result.setPrettyCreatedDateTime(PRETTY_TIME.format(createDateTime));
+        result.setPrettyCreateDateTime(PRETTY_TIME.format(createDateTime));
         return result;
     }
 
@@ -79,7 +79,7 @@ public class GraphqlBeanMapper {
         var expiryDateTime = original.getExpiryTimestamp().atOffset(ZONE_OFFSET);
 
         result.setAuthToken(original.getAuthToken());
-        result.setExpireTime(expiryDateTime);
+        result.setExpiryTime(expiryDateTime);
         return result;
     }
 }

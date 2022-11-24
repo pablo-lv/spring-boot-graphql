@@ -3,6 +3,7 @@ package com.plucas.graphql.component.problems;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.InputArgument;
+import com.netflix.graphql.dgs.exceptions.DgsEntityNotFoundException;
 import com.plucas.graphql.generated.DgsConstants;
 import com.plucas.graphql.generated.types.SearchItemFilter;
 import com.plucas.graphql.generated.types.SearchableItem;
@@ -38,6 +39,9 @@ public class ItemSearchDataResolver {
         result.addAll(problemsByKeyword);
         result.addAll(solutionsByKeyword);
 
+        if (result.isEmpty()) {
+            throw new DgsEntityNotFoundException("Not item with keyword " + keyword);
+        }
 
         result.sort(
                 Comparator.comparing(SearchableItem::getCreateDateTime).reversed()

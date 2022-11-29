@@ -3,11 +3,14 @@ package com.plucas.graphql.component.problems;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.InputArgument;
+import com.plucas.graphql.exeption.ProblemAuthenticationException;
 import com.plucas.graphql.generated.DgsConstants;
 import com.plucas.graphql.generated.types.Problem;
 import com.plucas.graphql.generated.types.ProblemCreateInput;
 import com.plucas.graphql.generated.types.ProblemResponse;
+import com.plucas.graphql.service.command.ProblemCommandService;
 import com.plucas.graphql.service.query.ProblemQueryService;
+import com.plucas.graphql.service.query.UserQueryService;
 import com.plucas.graphql.util.GraphqlBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -23,6 +26,12 @@ public class ProblemDataResolver {
 
     @Autowired
     private ProblemQueryService problemQueryService;
+
+    @Autowired
+    private ProblemCommandService problemCommandService;
+
+    @Autowired
+    private UserQueryService userQueryService;
 
     @DgsData(parentType = DgsConstants.QUERY_TYPE, field = DgsConstants.QUERY.ProblemLatestList)
     public List<Problem> getProblemLatestList() {
@@ -50,7 +59,15 @@ public class ProblemDataResolver {
             @RequestHeader(name = "authToken") String authToken,
             @InputArgument(name = "problem")ProblemCreateInput input
             ) {
-        return null;
+
+        var user = userQueryService.findByAuthToken(authToken).orElseThrow(ProblemAuthenticationException::new);
+
+        var problem = GraphqlBeanMapper.mapToEntity(input, user);
+
+        var created = problemCommandService.createProblem(problem);
+
+
+        return ProblemResponse.newBuilder().problem(GraphqlBeanMapper.mapToGraphql(created)).build();
     }
 
 

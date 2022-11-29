@@ -4,15 +4,14 @@ import com.plucas.graphql.datasource.problems.entity.Problem;
 import com.plucas.graphql.datasource.problems.entity.Solution;
 import com.plucas.graphql.datasource.problems.entity.User;
 import com.plucas.graphql.datasource.problems.entity.UserToken;
+import com.plucas.graphql.generated.types.ProblemCreateInput;
 import com.plucas.graphql.generated.types.SolutionCategory;
 import com.plucas.graphql.generated.types.UserAuthToken;
 import org.apache.commons.lang3.StringUtils;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GraphqlBeanMapper {
@@ -80,6 +79,19 @@ public class GraphqlBeanMapper {
 
         result.setAuthToken(original.getAuthToken());
         result.setExpiryTime(expiryDateTime);
+        return result;
+    }
+
+    public static Problem mapToEntity(ProblemCreateInput input, User author) {
+        var result = new Problem();
+
+        result.setContent(input.getContent());
+        result.setCreatedBy(author);
+        result.setId(UUID.randomUUID());
+        result.setSolutions(Collections.emptyList());
+        result.setTags(String.join(",", input.getTags()));
+        result.setTitle(input.getTitle());
+
         return result;
     }
 }

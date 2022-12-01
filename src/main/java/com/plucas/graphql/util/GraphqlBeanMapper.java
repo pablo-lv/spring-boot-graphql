@@ -6,10 +6,12 @@ import com.plucas.graphql.datasource.problems.entity.User;
 import com.plucas.graphql.datasource.problems.entity.UserToken;
 import com.plucas.graphql.generated.types.ProblemCreateInput;
 import com.plucas.graphql.generated.types.SolutionCategory;
+import com.plucas.graphql.generated.types.SolutionCreateInput;
 import com.plucas.graphql.generated.types.UserAuthToken;
 import org.apache.commons.lang3.StringUtils;
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -93,5 +95,18 @@ public class GraphqlBeanMapper {
         result.setTitle(input.getTitle());
 
         return result;
+    }
+
+    public static Solution mapToEntity(SolutionCreateInput input, User author, Problem problem) {
+
+        var result = new Solution();
+        result.setCategory(input.getCategory().name());
+        result.setContent(input.getContent());
+        result.setCreatedBy(author);
+        result.setId(UUID.randomUUID());
+        result.setProblem(problem);
+        result.setCreationTimestamp(LocalDateTime.now());
+        return result;
+
     }
 }

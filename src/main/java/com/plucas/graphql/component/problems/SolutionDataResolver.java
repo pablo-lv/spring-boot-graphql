@@ -71,7 +71,8 @@ public class SolutionDataResolver {
 
 
     @DgsData(parentType = DgsConstants.SUBSCRIPTION_TYPE, field = DgsConstants.SUBSCRIPTION.SolutionVoteChanged)
-    public Flux<Solution> solutionVoteChanged(@InputArgument(name = "solutionId") String solutionId) {
-        return null;
+    public Flux<com.plucas.graphql.generated.types.Solution> subscribeSolutionVote(@InputArgument(name = "solutionId") String solutionId) {
+
+        return solutionCommandService.solutionFlux().map(GraphqlBeanMapper::mapToGraphql);
     }
 }

@@ -1,5 +1,6 @@
 package com.plucas.graphql.service.command;
 
+import com.plucas.graphql.datasource.problems.entity.User;
 import com.plucas.graphql.datasource.problems.entity.UserToken;
 import com.plucas.graphql.datasource.problems.repository.UserRepository;
 import com.plucas.graphql.datasource.problems.repository.UserTokenRepository;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -47,6 +49,16 @@ public class UserCommandService {
         userToken.setExpiryTimestamp(now.plusHours(2));
 
         return userTokenRepository.save(userToken);
+    }
+
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public Optional<User> activateUser(String username, boolean isActive) {
+        userRepository.activateUser(username, isActive);
+
+        return userRepository.findByUsername(username);
     }
 
 }

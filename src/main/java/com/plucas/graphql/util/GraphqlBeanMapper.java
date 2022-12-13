@@ -4,10 +4,7 @@ import com.plucas.graphql.datasource.problems.entity.Problem;
 import com.plucas.graphql.datasource.problems.entity.Solution;
 import com.plucas.graphql.datasource.problems.entity.User;
 import com.plucas.graphql.datasource.problems.entity.UserToken;
-import com.plucas.graphql.generated.types.ProblemCreateInput;
-import com.plucas.graphql.generated.types.SolutionCategory;
-import com.plucas.graphql.generated.types.SolutionCreateInput;
-import com.plucas.graphql.generated.types.UserAuthToken;
+import com.plucas.graphql.generated.types.*;
 import org.apache.commons.lang3.StringUtils;
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -108,5 +105,19 @@ public class GraphqlBeanMapper {
         result.setCreationTimestamp(LocalDateTime.now());
         return result;
 
+    }
+
+    public static User mapToEntity(UserCreateInput input) {
+        var result = new User();
+
+        result.setUsername(input.getUsername());
+        result.setId(UUID.randomUUID());
+        result.setHashedPassword(HashUtil.hashBCrypt(input.getPassword()));
+        result.setEmail(input.getEmail());
+        result.setDisplayName(input.getDisplayName());
+        result.setAvatar(input.getAvatar());
+        result.setActive(true);
+
+        return result;
     }
 }
